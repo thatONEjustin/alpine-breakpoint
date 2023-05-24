@@ -4,7 +4,7 @@ x-directive and $magic for responsive event handling
 just the directive for now
 
 ```html
-<div x-data="{ isMobile: null }" x-breakpoint:max.768 @breakpoint="test = $event.detail.matches">
+<div x-data="{ test: null }" x-breakpoint:max.768 @breakpoint="test = $event.detail.matches">
     <p x-text="`component1: ${test}`"></p>
     <span x-text="(test) ? `👍` : `👎`"></span>
 </div>
