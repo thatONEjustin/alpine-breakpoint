@@ -1,5 +1,6 @@
-const esbuild = require('esbuild');
-const { file: brotliSizeFromFile } = require('brotli-size');
+import esbuild from 'esbuild';
+// const esbuild = require('esbuild');
+// const { file: brotliSizeFromFile } = require('brotli-size');
 
 const scriptName = 'breakpoint';
 const watching = process.argv.includes('--watch');
@@ -53,10 +54,10 @@ function buildScripts() {
 		minify: true,
 		platform: 'browser',
 	}).then(async ({ options }) => {
-		const { gzipSizeFromFile } = await import('gzip-size');
-		const gzipped = bytesToSize(await gzipSizeFromFile(options.outfile));
-		const brotli = bytesToSize(await brotliSizeFromFile(options.outfile));
-		console.log(`✅ ${ options.outfile }: ${ gzipped } gzipped, ${ brotli } brotli`)
+		// const { gzipSizeFromFile } = await import('gzip-size');
+		// const gzipped = bytesToSize(await gzipSizeFromFile(options.outfile));
+		// const brotli = bytesToSize(await brotliSizeFromFile(options.outfile));
+		// console.log(`✅ ${ options.outfile }: ${ gzipped } gzipped, ${ brotli } brotli`)
 	})
 	
 	// ESM
