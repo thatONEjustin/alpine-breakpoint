@@ -1,6 +1,6 @@
 // src/index.js
 function src_default(Alpine) {
-  Alpine.directive("breakpoint", async (el, { value, modifiers, expression }, { Alpine: Alpine2, evaluateLater, effect, cleanup }) => {
+  Alpine.directive("breakpoint", (el, { value, modifiers }, { cleanup }) => {
     let mediaQuery = window.matchMedia(`(${value}-width: ${modifiers[0]}px)`);
     const initEvent = new CustomEvent("breakpoint", {
       bubbles: false,
@@ -8,7 +8,7 @@ function src_default(Alpine) {
         matches: mediaQuery.matches
       }
     });
-    await Alpine2.$nextTick;
+    Alpine.$nextTick;
     el.dispatchEvent(initEvent);
     mediaQuery.addEventListener("change", (event) => {
       el.dispatchEvent(new CustomEvent("breakpoint", {

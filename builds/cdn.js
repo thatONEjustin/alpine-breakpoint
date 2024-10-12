@@ -1,5 +1,5 @@
 import breakpoint from '../src/index'
 
-document.addEventListener('alpine:initializing', () => {
-    window.Alpine.plugin(breakpoint)
+document.addEventListener('alpine:init', () => {
+  window.Alpine.plugin(breakpoint)
 })

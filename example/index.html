@@ -1,22 +1,22 @@
 <html>
-    <head>
+  <head>
 
-    </head>
+  </head>
 
-    <body x-data="{ width: window.innerWidth }" @resize.window.debounce.15ms="width = window.innerWidth">
-        <h3 x-text="`Window Width: ${width}px`"></h3>
-        
-        <div x-data="{ test: true }" x-breakpoint:max.768 @breakpoint="test = $event.detail.matches">
-            <p x-text="`component1: ${test}`"></p>
-            <span x-text="(test) ? `👍` : `👎`"></span>
-        </div>
-        
-        <div x-data="{ test: false }" x-breakpoint:min.1440 @breakpoint="test = $event.detail.matches">
-            <p x-text="`component2: ${test}`"></p>
-            <span x-text="(test) ? `👍` : `👎`"></span>
-        </div>
+  <body class="w-full" x-data="{ width: window.innerWidth }" @resize.window.debounce.15ms="width = window.innerWidth">
+    <h3 x-text="`Window Width: ${width}px`"></h3>
+    
+    <div x-data="{ test: true }" x-breakpoint:max.768 @breakpoint="test = $event.detail.matches">
+      <p x-text="`component1: ${test}`"></p>
+      <span x-text="(test) ? `👍` : `👎`"></span>
+    </div>
+    
+    <div x-data="{ test: false }" x-breakpoint:min.1440 @breakpoint="test = $event.detail.matches">
+      <p x-text="`component2: ${test}`"></p>
+      <span x-text="(test) ? `👍` : `👎`"></span>
+    </div>
 
-        <script defer src="../dist/example.js"></script> <!-- /dist/example.js is just breakpoint.js but piped for watch -->
-        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    </body>
+    <script defer src="../dist/example.js"></script> <!-- /dist/example.js is just breakpoint.js but piped for watch -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </body>
 </html>
