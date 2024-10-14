@@ -1,8 +1,9 @@
 {
-  "name": "alpine-breakpoint",
-  "version": "1.0.0",
-  "description": "x-directive and $magic for responsive event handling.",
-  "main": "index.js",
+  "name": "@thatonejustin/alpine-breakpoint",
+  "version": "1.0.1",
+  "description": "x-directive for responsive event handling.",
+  "main": "dist/module.cjs.js",
+  "module": "dist/module.esm.js",
   "type": "module",
   "scripts": {
     "test:init": "jest --init",
