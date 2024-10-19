@@ -37,15 +37,6 @@ function buildScripts() {
     platform: 'browser',
   });
 
-  if (!watching) {
-    build({
-      entryPoints: ['builds/cdn.js'],
-      outfile: `dist/example.js`,
-      bundle: true,
-      platform: 'browser',
-    })
-  }
-
   // CDN — minified
   build({
     entryPoints: ['builds/cdn.js'],
