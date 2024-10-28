@@ -19,7 +19,7 @@ const breakpoint_directive = async (
    * here allows a variable to be modified with addEventListener later on
    * esp with typescript being so strict in these builds.
    * */
-  const media_query = window.matchMedia(media_query_string);
+  const media_query: MediaQueryList = window.matchMedia(media_query_string);
 
   // const init_event: CustomEvent = event_factory(media_query.matches);
 

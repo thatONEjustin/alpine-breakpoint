@@ -8,7 +8,7 @@
         <h3 x-text="`Window Width: ${width}px`"></h3>
       </div>
 
-      <div x-data="{ is_mobile: true }" x-breakpoint:max.768 @breakpoint="is_mobile = $event.detail.matches">
+      <div x-data="{ is_mobile: true }" x-breakpoint @breakpoint="is_mobile = $event.detail.matches">
         <p x-text="`component1: ${is_mobile}`"></p>
         <h1 x-text="(is_mobile) ? `👍` : `👎`"></h1>
       </div>
