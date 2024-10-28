@@ -1,22 +1,24 @@
 <html>
-  <head>
+    <head>
+      <meta name="viewport" content="width=device-width">
+    </head>
 
-  </head>
+    <body>
+      <div x-data="{ width: window.innerWidth }" @resize.window.debounce.15ms="width = window.innerWidth">
+        <h3 x-text="`Window Width: ${width}px`"></h3>
+      </div>
 
-  <body class="w-full" x-data="{ width: window.innerWidth }" @resize.window.debounce.15ms="width = window.innerWidth">
-    <h3 x-text="`Window Width: ${width}px`"></h3>
-    
-    <div x-data="{ test: true }" x-breakpoint:max.768 @breakpoint="test = $event.detail.matches">
-      <p x-text="`component1: ${test}`"></p>
-      <span x-text="(test) ? `👍` : `👎`"></span>
-    </div>
-    
-    <div x-data="{ test: false }" x-breakpoint:min.1440 @breakpoint="test = $event.detail.matches">
-      <p x-text="`component2: ${test}`"></p>
-      <span x-text="(test) ? `👍` : `👎`"></span>
-    </div>
+      <div x-data="{ is_mobile: true }" x-breakpoint:max.768 @breakpoint="is_mobile = $event.detail.matches">
+        <p x-text="`component1: ${is_mobile}`"></p>
+        <h1 x-text="(is_mobile) ? `👍` : `👎`"></h1>
+      </div>
 
-    <script defer src="../dist/example.js"></script> <!-- /dist/example.js is just breakpoint.js but piped for watch -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  </body>
+      <div x-data="{ test: false }" x-breakpoint:min.1440 @breakpoint="test = $event.detail.matches">
+        <p x-text="`component2: ${test}`"></p>
+        <h1 x-text="(test) ? `👍` : `👎`"></h1>
+      </div>
+
+      <script defer src="../dist/example.js"></script> <!-- /dist/example.js is just breakpoint.js but piped for watch -->
+      <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    </body>
 </html>

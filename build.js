@@ -1,11 +1,12 @@
 import esbuild from 'esbuild';
 // const esbuild = require('esbuild');
 // const { file: brotliSizeFromFile } = require('brotli-size');
+import { file as brotliSizeFromFile } from 'brotli-size'
 
 const scriptName = 'module';
 const watching = process.argv.includes('--watch');
 
-function build(options = {}) {
+async function build(options = {}) {
   options.define || (options.define = {});
   options.define['process.env.NODE_ENV'] = watching
     ? `'development'`
@@ -16,7 +17,7 @@ function build(options = {}) {
       ...options,
     })
     .then(result => ({ result, options }))
-    .catch((e) => {
+    .catch((_e) => {
       // console.error(e);
       process.exit(1)
     });
@@ -37,6 +38,13 @@ function buildScripts() {
     platform: 'browser',
   });
 
+  build({
+    entryPoints: ['builds/cdn.js'],
+    outfile: `dist/example.js`,
+    bundle: true,
+    platform: 'browser',
+  })
+
   // CDN — minified
   build({
     entryPoints: ['builds/cdn.js'],
@@ -45,10 +53,10 @@ function buildScripts() {
     minify: true,
     platform: 'browser',
   }).then(async ({ options }) => {
-    // const { gzipSizeFromFile } = await import('gzip-size');
-    // const gzipped = bytesToSize(await gzipSizeFromFile(options.outfile));
-    // const brotli = bytesToSize(await brotliSizeFromFile(options.outfile));
-    // console.log(`✅ ${ options.outfile }: ${ gzipped } gzipped, ${ brotli } brotli`)
+    const { gzipSizeFromFile } = await import('gzip-size');
+    const gzipped = bytesToSize(await gzipSizeFromFile(options.outfile));
+    const brotli = bytesToSize(await brotliSizeFromFile(options.outfile));
+    console.log(`✅ ${options.outfile}: ${gzipped} gzipped, ${brotli} brotli`)
   })
 
   // ESM
@@ -69,15 +77,6 @@ function buildScripts() {
     bundle: true,
     target: ['node10.4'],
     platform: 'node',
-  }).then(async ({ options }) => {
-    console.log(`✅ ${options.outfile}`)
-  })
-
-  // example
-  build({
-    entryPoints: ['builds/cdn.js'],
-    outfile: `dist/example.js`,
-    bundle: true,
   }).then(async ({ options }) => {
     console.log(`✅ ${options.outfile}`)
   })
