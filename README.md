@@ -2,6 +2,8 @@
 
 x-directive for responsive event handling
 
+x-directive for responsive event handling
+
 ```html
 <div x-data="{ test: null }" x-breakpoint:max.768 @breakpoint="test = $event.detail.matches">
     <p x-text="`component1: ${test}`"></p>
