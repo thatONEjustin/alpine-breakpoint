@@ -4,12 +4,11 @@ export default function (Alpine: AlpineInstance) {
   Alpine.directive('breakpoint', breakpoint_directive)
 }
 
-const breakpoint_directive = async (
+async function breakpoint_directive(
   element: HTMLElement,
   { value, modifiers },
   { Alpine, cleanup }
-) => {
-
+): Promise<void> {
   const mobile_breakpoint_type = (value) ? value : 'max'
   const mobile_width = (modifiers.length != 0) ? modifiers[0] : 768
   const media_query_string = `(${mobile_breakpoint_type}-width: ${mobile_width}px)`
@@ -20,8 +19,6 @@ const breakpoint_directive = async (
    * esp with typescript being so strict in these builds.
    * */
   const media_query: MediaQueryList = window.matchMedia(media_query_string);
-
-  // const init_event: CustomEvent = event_factory(media_query.matches);
 
   /*
    * HACK: I want the element to be the event dispatcher origin
@@ -38,9 +35,7 @@ const breakpoint_directive = async (
 
   element.dispatchEvent(event_factory(media_query.matches))
 
-  cleanup(() => {
-    media_query.removeEventListener('change', custom_event_listener)
-  })
+  cleanup(() => media_query.removeEventListener('change', custom_event_listener))
 }
 
 function event_factory(is_mobile: boolean): CustomEvent {
